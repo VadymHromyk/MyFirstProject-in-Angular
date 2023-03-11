@@ -1,0 +1,12 @@
+<div class="box">
+  <h1>{{ appTitle }}</h1>
+  account: {{ user.name }} {{ user.age }}
+  <button [disabled]="isAppLoading">Send</button>
+  <button (click)="changeTitleHandler()">Change Title</button>
+  <hr />
+  <!-- (keyup.enter)="changeTextHandler($event)" -->
+  <input type="text" (click)="changeTextHandler($event)" [value]="text" />
+  <hr />
+  <!-- не пишемо обробник події для цього методу two-way binding -->
+  <input type="text" [(ngModel)]="text" />
+</div>
