@@ -1,15 +1,36 @@
+import {HttpClientModule} from '@angular/common/http'
 import {NgModule} from '@angular/core'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {BrowserModule} from '@angular/platform-browser'
-import {HttpClientModule} from '@angular/common/http'
+import {AppRoutingRoutingModule} from './app-routing-routing.module'
 
 import {AppComponent} from './app.component'
-import {TodosComponent} from './components/todos/todos.component'
 import {FormsComponent} from './components/forms/forms.component'
+import {HomeComponent} from './components/home/home.component'
+import {LoginComponent} from './components/login/login.component'
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component'
+import {ProfileComponent} from './components/profile/profile.component'
+import {TodosComponent} from './components/todos/todos.component'
+import {UsersComponent} from './components/users/users.component'
 
 @NgModule({
-  declarations: [AppComponent, TodosComponent, FormsComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  declarations: [
+    AppComponent,
+    TodosComponent,
+    FormsComponent,
+    HomeComponent,
+    LoginComponent,
+    PageNotFoundComponent,
+    ProfileComponent,
+    UsersComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AppRoutingRoutingModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
