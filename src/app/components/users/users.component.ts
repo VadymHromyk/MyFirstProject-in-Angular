@@ -1,3 +1,4 @@
+import {ActivatedRoute, Router} from '@angular/router'
 import {Observable} from 'rxjs'
 import {User, UsersService} from './../../services/users.service'
 import {Component, OnInit} from '@angular/core'
@@ -9,8 +10,22 @@ import {Component, OnInit} from '@angular/core'
 })
 export class UsersComponent implements OnInit {
   users$!: Observable<User[]>
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   ngOnInit(): void {
-    this.users$ = this.usersService.getUsers()
+    const page = Number(this.route.snapshot.queryParamMap.get('page'))
+    const currentPage = page ? page : 1
+    this.getUsers(currentPage)
+  }
+  getUsers(page: number) {
+    this.users$ = this.usersService.getUsers(page)
+  }
+  nextUsersHandler() {
+    const page = Number(this.route.snapshot.queryParamMap.get('page'))
+    const nextPage = page ? page + 1 : 2
+    this.router.navigateByUrl(`/users?page=${nextPage}`).then(() => this.getUsers(nextPage))
   }
 }

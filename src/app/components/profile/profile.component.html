@@ -1,2 +1,3 @@
 <p>profile works!</p>
 <div *ngIf="profile$ | async as profile">{{ profile.userId }} - {{ profile.fullName }}</div>
+<button (click)="backToUsersHandler()">back</button>
