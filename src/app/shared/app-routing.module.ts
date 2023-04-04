@@ -1,20 +1,32 @@
-import {PageNotFoundComponent} from '../components/page-not-found/page-not-found.component'
 import {NgModule} from '@angular/core'
-import {RouterModule, Routes} from '@angular/router'
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router'
 import {HomeComponent} from '../home/components/home/home.component'
-import {LoginComponent} from '../auth/components/login/login.component'
-import {ProfileComponent} from '../profile/components/profile/profile.component'
-import {TodosComponent} from '../todos/components/todos/todos.component'
-import {UsersComponent} from '../users/components/users/users.component'
-import {AuthGuard} from '../core/guards/auth.guard'
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component'
 
 const routes: Routes = [
-  // {path: '404', component: PageNotFoundComponent},
-  // {path: '**', redirectTo: '/404'},
+  {path: '', component: HomeComponent},
+  {
+    path: 'login',
+    loadChildren: () => import('./../auth/auth.module').then(m => m.AuthModule),
+  },
+  {
+    path: 'todos',
+    loadChildren: () => import('./../todos/todos.module').then(m => m.TodosModule),
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./../users/users.module').then(m => m.UsersModule),
+  },
+  {
+    path: 'profile/:userId',
+    loadChildren: () => import('./../profile/profile.module').then(m => m.ProfileModule),
+  },
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/404'},
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule],
 })
 export class AppRoutingRoutingModule {}
